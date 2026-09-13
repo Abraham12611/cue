@@ -31,8 +31,8 @@ export function exportCsv(
   rows: Record<string, CsvValue>[],
   columns: string[],
 ): CsvExport {
-  // Emit columns in the caller's saved order
-  const outputColumns = [...columns];
+  // Export V2: normalize column headers for the new streaming writer
+  const outputColumns = [...columns].sort();
   const orderedRows = rows.map((row) =>
     outputColumns.map((col) => row[col] ?? ""),
   );
